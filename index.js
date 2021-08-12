@@ -48,6 +48,19 @@ app.get("/game/:id", (req, res) => {
   }
 });
 
+app.post("/game", (req, res) => {
+  var { title, price, year } = req.body;
+
+  db.games.push({
+    id: 30,
+    title,
+    price,
+    year,
+  });
+
+  res.sendStatus(200);
+});
+
 app.listen(8000, () => {
   console.log("Api rodando na porta 8000");
 });
