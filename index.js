@@ -1,4 +1,4 @@
-const app = require("express");
+const express = require("express");
 const app = express();
 
 var db = {
@@ -23,6 +23,11 @@ var db = {
     },
   ],
 };
+
+app.get("/games", (req, res) => {
+  res.statusCode = 200;
+  res.json(db.games);
+});
 
 app.listen(8000, () => {
   console.log("Api rodando na porta 8000");
