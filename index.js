@@ -29,6 +29,25 @@ app.get("/games", (req, res) => {
   res.json(db.games);
 });
 
+app.get("/game/:id", (req, res) => {
+  var id = req.params.id;
+
+  if (isNaN(id)) {
+    res.sendStatus(400);
+  } else {
+    var id = parseInt(id);
+
+    var game = db.games.find((g) => g.id === id);
+
+    if (game != undefined) {
+      res.statusCode = 200;
+      res.json(game);
+    } else {
+      res.sendStatus(404);
+    }
+  }
+});
+
 app.listen(8000, () => {
   console.log("Api rodando na porta 8000");
 });
