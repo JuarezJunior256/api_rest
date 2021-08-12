@@ -78,6 +78,37 @@ app.delete("/game/:id", (req, res) => {
   }
 });
 
+app.put("/game/:id", (req, res) => {
+  var id = req.params.id;
+  if (isNaN(id)) {
+    res.sendStatus(400);
+  } else {
+    var id = parseInt(id);
+
+    var game = db.games.find((g) => g.id == id);
+
+    if (game != undefined) {
+      var { title, price, year } = req.body;
+
+      if (title != undefined) {
+        game.title = title;
+      }
+
+      if (price != undefined) {
+        game.price = price;
+      }
+
+      if (year != undefined) {
+        game.year = year;
+      }
+
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(400);
+    }
+  }
+});
+
 app.listen(8000, () => {
   console.log("Api rodando na porta 8000");
 });
